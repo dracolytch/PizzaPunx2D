@@ -12,9 +12,13 @@ public class Supplier : MonoBehaviour
     public Animator anim;
     public Holdable currentHolding;
     public Transform holdLocation;
+    public bool IsUpgraded;
+    public float UpgradedMultiplier = 1.2f;
+    public Texture2D UpgradedSpriteSheetTexture;
 
     private float speed = 0;
     private Vector2 direction = Vector2.zero;
+    SpriteSwapper swapperScript;
 
     private enum MovementState { entering, waiting, returning, idle }
 
@@ -25,6 +29,18 @@ public class Supplier : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         if (sourceSocket == null) Debug.LogError("Source socked needs to be populated");
+
+        swapperScript = GetComponent<SpriteSwapper>();
+        if (swapperScript == null) Debug.LogError("Sprite swapper does not exist?");
+
+        if (IsUpgraded) Upgrade();
+    }
+
+    public void Upgrade()
+    {
+        IsUpgraded = true;
+        swapperScript.spriteSheetTexture = UpgradedSpriteSheetTexture;
+        swapperScript.ReloadDictionary();
     }
 
     void Update()
@@ -84,7 +100,10 @@ public class Supplier : MonoBehaviour
         }
 
         anim.SetFloat("Speed", speed);
-        this.transform.position += new Vector3(direction.x * speed, 0, 0);
+        var multiplier = 1f;
+        if (IsUpgraded) multiplier = UpgradedMultiplier;
+
+        transform.position += new Vector3(direction.x * speed * multiplier, 0, 0);
 
         if (currentHolding != null)
         {

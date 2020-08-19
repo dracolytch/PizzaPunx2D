@@ -16,18 +16,22 @@ public class SpriteSwapper : MonoBehaviour
 
         if (spriteSheetTexture != null)
         {
-            Sprite[] sprites = Resources.LoadAll<Sprite>(spriteSheetTexture.name);
-            spriteDict = new Dictionary<string, Sprite>();
-            foreach (var s in sprites)
-            {
-                spriteDict.Add(s.name, s);
-            }
+            ReloadDictionary();
         }
         else
         {
             Debug.LogError("Sprite sheet is null!");
         }
-        
+    }
+
+    public void ReloadDictionary()
+    {
+        Sprite[] sprites = Resources.LoadAll<Sprite>(spriteSheetTexture.name);
+        spriteDict = new Dictionary<string, Sprite>();
+        foreach (var s in sprites)
+        {
+            spriteDict.Add(s.name, s);
+        }
     }
 
     private void LateUpdate()
