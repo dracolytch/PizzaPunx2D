@@ -40,7 +40,7 @@ public class Supplier : MonoBehaviour
     {
         IsUpgraded = true;
         swapperScript.spriteSheetTexture = UpgradedSpriteSheetTexture;
-        swapperScript.ReloadDictionary();
+        swapperScript.ReloadSpritesheet();
     }
 
     void Update()

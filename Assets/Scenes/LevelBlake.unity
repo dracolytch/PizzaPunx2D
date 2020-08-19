@@ -10870,6 +10870,10 @@ MonoBehaviour:
   anim: {fileID: 0}
   currentHolding: {fileID: 0}
   holdLocation: {fileID: 1937674441}
+  IsUpgraded: 1
+  UpgradeSpeedMultiplier: 1.2
+  UpgradedSpriteSheetTexture: {fileID: 2800000, guid: eb95dcbd2f1f0e243a6cdc8bc8dc72a2,
+    type: 3}
 --- !u!212 &764142533
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34889,6 +34893,11 @@ MonoBehaviour:
   PizzaSocket: {fileID: 1012476743}
   PizzaPrefab: {fileID: 5919561411291976520, guid: 226153506464e314e8b5726329677d13,
     type: 3}
+  UpgradedSprite: {fileID: -549238694182217024, guid: eb95dcbd2f1f0e243a6cdc8bc8dc72a2,
+    type: 3}
+  MakeDoughTime: 2.5
+  MakeDoughUpgradedTime: 1.75
+  IsUpgraded: 1
 --- !u!212 &1645037445
 SpriteRenderer:
   m_ObjectHideFlags: 0

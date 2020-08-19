@@ -16,7 +16,7 @@ public class SpriteSwapper : MonoBehaviour
 
         if (spriteSheetTexture != null)
         {
-            ReloadDictionary();
+            ReloadSpritesheet();
         }
         else
         {
@@ -24,7 +24,7 @@ public class SpriteSwapper : MonoBehaviour
         }
     }
 
-    public void ReloadDictionary()
+    public void ReloadSpritesheet()
     {
         Sprite[] sprites = Resources.LoadAll<Sprite>(spriteSheetTexture.name);
         spriteDict = new Dictionary<string, Sprite>();

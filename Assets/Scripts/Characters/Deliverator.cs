@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,11 @@ public class Deliverator : MonoBehaviour
     public Animator anim;
     public Holdable currentHolding;
     public Transform holdLocation;
+    public bool IsUpgraded;
+    public float UpgradeSpeedMultiplier = 1.2f;
+    public Texture2D UpgradedSpriteSheetTexture;
 
+    private SpriteSwapper swapper;
     private float speed = 0;
     private Vector2 direction = Vector2.zero;
 
@@ -28,12 +33,26 @@ public class Deliverator : MonoBehaviour
         if (gameManager == null) Debug.LogError("Game manager missing? What??");
         anim = GetComponent<Animator>();
         if (destinationSocket == null) Debug.LogError("Destination socket needs to be populated");
+        swapper = GetComponent<SpriteSwapper>();
+        if (swapper == null) Debug.LogError("Sprite swapper missing?");
+
+        if (IsUpgraded) Upgrade();
+    }
+
+    public void Upgrade()
+    {
+        IsUpgraded = true;
+        swapper.spriteSheetTexture = UpgradedSpriteSheetTexture;
+        swapper.ReloadSpritesheet();
     }
 
     void Update()
     {
         var isMoving = false;
         direction.y = 0;
+
+        var speedMultiplier = 1f;
+        if (IsUpgraded) speedMultiplier = UpgradeSpeedMultiplier;
 
         switch (currentState)
         {
@@ -89,7 +108,7 @@ public class Deliverator : MonoBehaviour
         }
 
         anim.SetFloat("Speed", speed);
-        this.transform.position += new Vector3(0, direction.y * speed, 0);
+        this.transform.position += new Vector3(0, direction.y * speed * speedMultiplier, 0);
 
         if (currentHolding != null)
         {
