@@ -22,7 +22,14 @@ public class WorkerScript : MonoBehaviour
         myParticles = GetComponentInChildren<ParticleSystem>();
         ren = GetComponent<SpriteRenderer>();
         if (ren == null) Debug.LogError("Worker has no sprite renderer?");
-        if (IsUpgraded) ren.sprite = UpgradedSprite;
+        if (IsUpgraded) Upgrade();
+    }
+
+    public void Upgrade()
+    {
+        IsUpgraded = true;
+        ren = GetComponent<SpriteRenderer>();
+        ren.sprite = UpgradedSprite;
     }
 
     public void Activate()
@@ -36,13 +43,14 @@ public class WorkerScript : MonoBehaviour
 
             if (myParticles && myParticles.isPlaying == false)
             {
+                if (myParticles.isPlaying == true) myParticles.Stop();
                 var m = myParticles.main;
-                m.duration = t + 0.5f;
+                m.duration = t + 0.25f;
                 myParticles.Play();
             }
 
             IngredientSocket.Consume(t);
-            StartCoroutine(ProgressPizzaCo(t + 0.5f, ingredient.Ingredient));
+            StartCoroutine(ProgressPizzaCo(t + 0.25f, ingredient.Ingredient));
         }
 
     }

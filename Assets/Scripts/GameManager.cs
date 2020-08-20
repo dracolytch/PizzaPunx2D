@@ -33,10 +33,16 @@ public class GameManager : MonoBehaviour
 
     public List<IngredientMax> IngredientsPerStage;
 
+    public float CurrentMoney;
+    public AudioClip EarlyMusic;
+    public AudioClip MidMusic;
+    public AudioClip LateMusic;
+    public AudioSource BgmAudioSource;
+    public AudioSource SfxAudioSource;
+    public WorkerManager workerManager;
+
     public UnityIntEvent OnMoneyChanged;
     public UnityEvent OnLevelDone;
-
-    public float CurrentMoney;
 
     GameState currentGameState;
 
@@ -44,6 +50,9 @@ public class GameManager : MonoBehaviour
     {
         if (orderManager == null) Debug.LogError("Game manager has no order manager!");
         if (pizzaSpriteManager == null) Debug.LogError("Game manager has no pizza sprite manager!");
+        if (BgmAudioSource == null) Debug.LogError("Can't play background music");
+        if (SfxAudioSource == null) Debug.LogError("Can't play global sound effects");
+        if (workerManager == null) Debug.LogError("Can't find worker manager");
 
         currentGameState = FindObjectOfType<GameState>();
         if (currentGameState == null)
@@ -60,6 +69,28 @@ public class GameManager : MonoBehaviour
             currentGameStage = currentGameState.CurrentStage;
 
             AddMoney(0); // Force money display to change
+
+            PlayBackgroundMusic(currentGameState.CurrentStage);
+
+            workerManager.UpgradeWorkers(currentGameState);
+        }
+    }
+
+    private void PlayBackgroundMusic(GameStage stage)
+    {
+        switch (stage)
+        {
+            case GameStage.early:
+                BgmAudioSource.PlayOneShot(EarlyMusic);
+                break;
+
+            case GameStage.mid:
+                BgmAudioSource.PlayOneShot(MidMusic);
+                break;
+
+            case GameStage.late:
+                BgmAudioSource.PlayOneShot(LateMusic);
+                break;
         }
     }
 

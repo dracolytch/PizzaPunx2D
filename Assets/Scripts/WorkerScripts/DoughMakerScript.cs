@@ -31,6 +31,7 @@ public class DoughMakerScript : MonoBehaviour
 
     public void Upgrade()
     {
+        ren = GetComponent<SpriteRenderer>();
         ren.sprite = UpgradedSprite;
         IsUpgraded = true;
     }

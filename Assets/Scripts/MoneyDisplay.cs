@@ -28,13 +28,13 @@ public class MoneyDisplay : MonoBehaviour
         if (currentlyDisplayedAmount < targetAmount)
         {
             currentlyDisplayedAmount += changeSpeed;
-            targetTextbox.text = $"${currentlyDisplayedAmount}";
         }
 
         if (currentlyDisplayedAmount > targetAmount)
         {
             currentlyDisplayedAmount -= changeSpeed;
-            targetTextbox.text = $"{prefix}${currentlyDisplayedAmount}";
         }
+
+        targetTextbox.text = $"{prefix}${currentlyDisplayedAmount}";
     }
 }
