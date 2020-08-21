@@ -29,6 +29,9 @@ public class OrderManager : MonoBehaviour
     public UnityIntEvent OnNewOrder;
     public UnityEvent OnCorrectOrder;
     public UnityEvent OnIncorrectOrder;
+    public UnityEvent OnLastCall;
+
+    private bool LastCall = false;
 
     GameManager gameManager;
 
@@ -43,6 +46,13 @@ public class OrderManager : MonoBehaviour
         if (timeUntilNextOrder < 0 && gameManager.TakingNewOrders() && NumOpenOrders() < maxOpenOrders)
         {
             CreateOrder();
+        }
+
+        // Are we switching from taking orders to not?
+        if (gameManager.TakingNewOrders() == false && LastCall == false)
+        {
+            LastCall = true;
+            if (OnLastCall != null) OnLastCall.Invoke();
         }
 
         // Add time to each open order in parallel
