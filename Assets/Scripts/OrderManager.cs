@@ -55,7 +55,7 @@ public class OrderManager : MonoBehaviour
         PizzaIngredient.PizzaInredientType topping = AnyRandomTopping();
 
         // No special meat early in the game
-        if (gameManager.currentGameStage == GameManager.GameStage.early)
+        if (gameManager.GetGameState().NumPurchases() == 0) // No purchases = no meat topping
         {
             while (topping == PizzaIngredient.PizzaInredientType.Cheese || topping == PizzaIngredient.PizzaInredientType.Sauce || topping == PizzaIngredient.PizzaInredientType.SpecialMeat)
             {

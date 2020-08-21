@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     {
         if (playerSfx.isPlaying == false)
         {
-            playerSfx.pitch = Random.Range(0.9f, 1.05f);
+            playerSfx.pitch = Random.Range(0.8f, 1.1f);
             playerSfx.PlayOneShot(SwipeClip);
         }
     }

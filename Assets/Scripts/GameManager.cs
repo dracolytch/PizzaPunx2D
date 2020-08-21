@@ -37,9 +37,11 @@ public class GameManager : MonoBehaviour
     public AudioClip EarlyMusic;
     public AudioClip MidMusic;
     public AudioClip LateMusic;
+    public AudioClip CashRegisterSound;
     public AudioSource BgmAudioSource;
     public AudioSource SfxAudioSource;
     public WorkerManager workerManager;
+    public GameObject MeatBadge;
 
     public UnityIntEvent OnMoneyChanged;
     public UnityEvent OnLevelDone;
@@ -76,6 +78,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameState GetGameState()
+    {
+        return currentGameState;
+    }
+
     private void PlayBackgroundMusic(GameStage stage)
     {
         switch (stage)
@@ -94,12 +101,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void RegisterPurchase(GameState state, GameObject badge)
+    {
+        SfxAudioSource.pitch = Random.Range(0.9f, 1.05f);
+        SfxAudioSource.PlayOneShot(CashRegisterSound);
+        if (state.NumPurchases() == 1)
+        {
+            badge.SetActive(true);
+        }
+    }
+
     public void PurchaseSwarm(int amount)
     {
         if (amount < CurrentMoney && currentGameState.HasSwarm == false)
         {
             AddMoney(-amount);
             currentGameState.HasSwarm = true;
+            RegisterPurchase(currentGameState, MeatBadge);
         }
     }
 
@@ -109,6 +127,7 @@ public class GameManager : MonoBehaviour
         {
             AddMoney(-amount);
             currentGameState.HasDoughMachine = true;
+            RegisterPurchase(currentGameState, MeatBadge);
         }
     }
 
@@ -118,6 +137,7 @@ public class GameManager : MonoBehaviour
         {
             AddMoney(-amount);
             currentGameState.HasSupplyBot = true;
+            RegisterPurchase(currentGameState, MeatBadge);
         }
     }
 
@@ -127,6 +147,7 @@ public class GameManager : MonoBehaviour
         {
             AddMoney(-amount);
             currentGameState.NumToppersReplaced++;
+            RegisterPurchase(currentGameState, MeatBadge);
         }
     }
 

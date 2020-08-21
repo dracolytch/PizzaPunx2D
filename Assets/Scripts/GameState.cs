@@ -14,4 +14,14 @@ public class GameState : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    public int NumPurchases()
+    {
+        var result = 0;
+        if (HasDoughMachine) result++;
+        if (HasSwarm) result++;
+        if (HasSupplyBot) result++;
+        result += NumToppersReplaced;
+        return result;
+    }
 }
