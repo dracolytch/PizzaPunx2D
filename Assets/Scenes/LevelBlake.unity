@@ -1970,7 +1970,7 @@ MonoBehaviour:
     type: 3}
   ToppedComboSprite: {fileID: 18664160619246784, guid: 8fe539ff20b4ea846acacc425e56bb39,
     type: 3}
-  ToppedWrongSprite: {fileID: -4486844644201012354, guid: d26f4af8fa19a31498fd0c49cbd29c05,
+  ToppedWrongSprite: {fileID: -4486844644201012354, guid: 8fe539ff20b4ea846acacc425e56bb39,
     type: 3}
   BakedDoughSprite: {fileID: -4486844644201012354, guid: d26f4af8fa19a31498fd0c49cbd29c05,
     type: 3}
@@ -1984,7 +1984,7 @@ MonoBehaviour:
     type: 3}
   BakedComboSprite: {fileID: -2816620714952469753, guid: 8fe539ff20b4ea846acacc425e56bb39,
     type: 3}
-  BakedWrongSprite: {fileID: -4486844644201012354, guid: d26f4af8fa19a31498fd0c49cbd29c05,
+  BakedWrongSprite: {fileID: -4486844644201012354, guid: 8fe539ff20b4ea846acacc425e56bb39,
     type: 3}
 --- !u!114 &253970647
 MonoBehaviour:

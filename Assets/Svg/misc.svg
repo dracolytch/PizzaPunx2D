@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="704.77783"
-     inkscape:cy="302.50221"
+     inkscape:cx="796.92069"
+     inkscape:cy="249.64507"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -158,21 +158,36 @@
          x="177.64882"
          y="228.20833"
          style="stroke-width:0.26458332"
-         id="tspan854">Have last call badge pop up</tspan><tspan
+         id="tspan840">Sauce -&gt; Topping = toppinged, should be wrong</tspan><tspan
          sodipodi:role="line"
          x="177.64882"
          y="241.4375"
          style="stroke-width:0.26458332"
-         id="tspan843">Toxic pizza when ingredients are wrong</tspan><tspan
+         id="tspan854">Have last call badge pop up</tspan><tspan
          sodipodi:role="line"
          x="177.64882"
          y="254.66666"
          style="stroke-width:0.26458332"
-         id="tspan856">Make an ending!</tspan><tspan
+         id="tspan843">- Toxic pizza when ingredients are wrong</tspan><tspan
          sodipodi:role="line"
          x="177.64882"
          y="267.89584"
          style="stroke-width:0.26458332"
-         id="tspan841">More reviews!</tspan></text>
+         id="tspan856">Make an ending!</tspan><tspan
+         sodipodi:role="line"
+         x="177.64882"
+         y="281.125"
+         style="stroke-width:0.26458332"
+         id="tspan841">More reviews!</tspan><tspan
+         sodipodi:role="line"
+         x="177.64882"
+         y="294.35416"
+         style="stroke-width:0.26458332"
+         id="tspan836">Negative cash at trash</tspan><tspan
+         sodipodi:role="line"
+         x="177.64882"
+         y="307.58334"
+         style="stroke-width:0.26458332"
+         id="tspan838">Trash penalty for leftover pizzas (except dough)</tspan></text>
   </g>
 </svg>

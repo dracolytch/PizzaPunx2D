@@ -1,32 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Pizza : MonoBehaviour
 {
-    public Sprite RawDoughSprite;
-
-    public Sprite SaucedSprite;
-    public Sprite BurnedSprite;
-    public Sprite ToppedCheeseSprite;
-    public Sprite ToppedVeggieSprite;
-    public Sprite ToppedPepperoniSprite;
-    public Sprite ToppedComboSprite;
-    public Sprite ToppedWrongSprite;
-
-    public Sprite BakedDoughSprite;
-    public Sprite BakedSauceSprite;
-    public Sprite BakedCheeseSprite;
-    public Sprite BakedVeggieSprite;
-    public Sprite BakedPepperoniSprite;
-    public Sprite BakedComboSprite;
-    public Sprite BakedWrongSprite;
-
     public ParticleSystem Cookedparticles;
     public ParticleSystem BurntParticles;
+    public ParticleSystem ToxicParticles;
 
     private SpriteRenderer spriteRenderer;
-
     private List<PizzaIngredient.PizzaInredientType> AddedIngredients = new List<PizzaIngredient.PizzaInredientType>();
 
     public enum PizzaStage { dough, sauced, toppinged, baked, burnt }
@@ -107,7 +88,7 @@ public class Pizza : MonoBehaviour
     public void AddCookTime(float t)
     {
         cookTime += t;
-        if (cookTime > neededCookTime) SetBaked();
+        if (cookTime > neededCookTime && cookTime < burnCookTime) SetBaked();
         if (cookTime > burnCookTime) SetBurnt();
     }
 
@@ -121,22 +102,27 @@ public class Pizza : MonoBehaviour
     {
         stage = PizzaStage.baked;
         SetBakedSprite();
-        var e = Cookedparticles.emission;
-        e.enabled = true;
+
+        var cp = Cookedparticles.emission;
+        cp.enabled = true;
     }
 
     void SetBurnt()
     {
         stage = PizzaStage.burnt;
-        spriteRenderer.sprite = BurnedSprite;
+        spriteRenderer.sprite = gameManager.pizzaSpriteManager.BurnedSprite;
 
         // turn off cooked particles
-        var e = Cookedparticles.emission;
-        e.enabled = false;
+        var cp = Cookedparticles.emission;
+        cp.enabled = false;
+
+        // turn off toxic particles
+        var tp = ToxicParticles.emission;
+        tp.enabled = false;
 
         // enable burnt particles
-        var e2 = BurntParticles.emission;
-        e2.enabled = true;
+        var bp = BurntParticles.emission;
+        bp.enabled = true;
     }
 
     public void AddIngredient(PizzaIngredient.PizzaInredientType newIngredient)
@@ -151,6 +137,11 @@ public class Pizza : MonoBehaviour
     private void SetToppingSprite()
     {
         spriteRenderer.sprite = gameManager.pizzaSpriteManager.GetPizzaSprite(AddedIngredients, false);
+        if (getPizzaType(AddedIngredients) == PizzaType.wrong)
+        {
+            var e = ToxicParticles.emission;
+            e.enabled = true;
+        }
     }
 
     private void SetBakedSprite() {
@@ -162,6 +153,18 @@ public class Pizza : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // turn off cooked particles
+        var cp = Cookedparticles.emission;
+        cp.enabled = false;
+
+        // turn off toxic particles
+        var tp = ToxicParticles.emission;
+        tp.enabled = false;
+
+        // enable burnt particles
+        var bp = BurntParticles.emission;
+        bp.enabled = false;
     }
 }
 

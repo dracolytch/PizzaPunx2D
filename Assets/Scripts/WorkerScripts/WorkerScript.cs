@@ -45,7 +45,7 @@ public class WorkerScript : MonoBehaviour
             {
                 if (myParticles.isPlaying == true) myParticles.Stop();
                 var m = myParticles.main;
-                m.duration = t + 0.25f;
+                if (myParticles.isPlaying == false) m.duration = t + 0.25f;
                 myParticles.Play();
             }
 
