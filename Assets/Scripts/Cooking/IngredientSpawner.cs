@@ -69,6 +69,8 @@ public class IngredientSpawner : MonoBehaviour
 
     public PizzaInredientType? PickThingToSpawn()
     {
+        if (gameManager.currentGameStage == GameManager.GameStage.end) return PizzaInredientType.SpecialMeat;
+
         var allThings = FindObjectsOfType<PizzaIngredient>();
         var allNeededIngredients = gameManager.orderManager.AllNeededIngredients();
 
@@ -85,15 +87,5 @@ public class IngredientSpawner : MonoBehaviour
             return allNeededIngredients[Random.Range(0, allNeededIngredients.Count)];
         }
         return null;
-        
-        /*
-        var sauces = allThings.Where(a => a.Ingredient == PizzaInredientType.Sauce);
-
-        var numSauce = allThings.Where(a => a.Ingredient == PizzaInredientType.Sauce).Count();
-        if (numSauce == 0) return PizzaInredientType.Sauce;
-
-        var numCheese = allThings.Where(a => a.Ingredient == PizzaInredientType.Cheese).Count();
-        if (numCheese == 0) return PizzaInredientType.Cheese;
-        */
     }
 }

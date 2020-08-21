@@ -91,6 +91,9 @@ public class OrderManager : MonoBehaviour
 
     public List<PizzaIngredient.PizzaInredientType> AllNeededIngredients()
     {
+        gameManager = GetGameManager();
+        if (gameManager.GetGameState().CurrentStage == GameManager.GameStage.end) return new List<PizzaIngredient.PizzaInredientType>() { PizzaIngredient.PizzaInredientType.SpecialMeat };
+
         var result = new List<PizzaIngredient.PizzaInredientType>();
 
         var openOrders = allOrders.Where(a => a.isOrderComplete == false);
@@ -211,9 +214,17 @@ public class OrderManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GetGameManager();
 
         allOrders = new List<PizzaOrder>();
+    }
+
+    GameManager GetGameManager()
+    {
+        if (gameManager != null) return gameManager;
+
+        gameManager = FindObjectOfType<GameManager>();
+        return gameManager;
     }
 
     public void TrashedPizza()
