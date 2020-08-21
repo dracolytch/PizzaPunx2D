@@ -41,7 +41,7 @@ public class WorkerScript : MonoBehaviour
             var t = ConsumeTime;
             if (IsUpgraded) t = UpgradedConsumeTime;
 
-            if (myParticles && myParticles.isPlaying == false)
+            if (myParticles)
             {
                 if (myParticles.isPlaying == true) myParticles.Stop();
                 var m = myParticles.main;

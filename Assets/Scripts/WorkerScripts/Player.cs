@@ -8,17 +8,29 @@ public class Player : MonoBehaviour
     public float targetSpeed = 0.05f;
     public Transform holdLocation;
     public float interactDistance = 0.4f;
+    public AudioClip SwipeClip;
 
     private Animator anim;
     private float speed = 0;
     private Vector2 direction = Vector2.zero;
     private bool interacting = false;
     private Holdable currentHolding;
+    private AudioSource playerSfx;
+
+    public void PlaySwipe()
+    {
+        if (playerSfx.isPlaying == false)
+        {
+            playerSfx.pitch = Random.Range(0.9f, 1.05f);
+            playerSfx.PlayOneShot(SwipeClip);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        playerSfx = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -81,6 +93,7 @@ public class Player : MonoBehaviour
         if (currentHolding != null)
         {
             //interactable that is holdable is released
+            PlaySwipe();
             currentHolding.Drop();
             currentHolding = null;
             return;
@@ -108,9 +121,8 @@ public class Player : MonoBehaviour
             {
                 currentHolding = holdable;
                 currentHolding.Pickup();
+                PlaySwipe();
             }
-
-            //Todo otherwise interact
         }
     }
 }

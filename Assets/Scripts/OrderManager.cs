@@ -27,6 +27,8 @@ public class OrderManager : MonoBehaviour
 
     public UnityIntEvent OnOrderComplete;
     public UnityIntEvent OnNewOrder;
+    public UnityEvent OnCorrectOrder;
+    public UnityEvent OnIncorrectOrder;
 
     GameManager gameManager;
 
@@ -147,11 +149,13 @@ public class OrderManager : MonoBehaviour
             case ReviewGrade.correct:
                 money *= rewardForRightButton;
                 feedbackItems.Add("Correct Reponse", Color.green);
+                if (OnCorrectOrder != null) OnCorrectOrder.Invoke();
                 break;
 
             case ReviewGrade.incorrect:
                 money *= penaltyForWrongButton;
                 feedbackItems.Add("Incorrect Reponse", Color.yellow);
+                if (OnIncorrectOrder != null) OnIncorrectOrder.Invoke();
                 break;
 
             case ReviewGrade.missed:

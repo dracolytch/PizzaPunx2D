@@ -14,6 +14,7 @@ public class ShowReview : MonoBehaviour
 
     public UnityEvent OnThank;
     public UnityEvent OnPlacate;
+    public UnityEvent OnShowReview;
 
     public string InitialText;
 
@@ -153,6 +154,7 @@ public class ShowReview : MonoBehaviour
 
     IEnumerator AnimateOpeningCo(string content)
     {
+        if (OnShowReview != null) OnShowReview.Invoke();
         currentStatus = ReviewStatus.revealing;
         var elapsed = 0f;
         var rt = textToAnimate.GetComponent<RectTransform>();
