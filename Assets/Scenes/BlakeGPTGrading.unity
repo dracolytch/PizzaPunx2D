@@ -1685,8 +1685,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 62.75, y: 167.3}
-  m_SizeDelta: {x: 506.9, y: 619.5}
+  m_AnchoredPosition: {x: 62.75, y: 59.1}
+  m_SizeDelta: {x: 506.9, y: 403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1174721581
 MonoBehaviour:
@@ -2577,6 +2577,7 @@ MonoBehaviour:
   textGameStage: 0
   requiresReview: 0
   reject: 0
+  StartAtReviewNum: 0
 --- !u!114 &1688317005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2831,8 +2832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296794e4e6e84624eae4fc9554d3fbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourceFile: C:\UnityProjects\DonPizza\PizzaPunx2D\Assets\Data\processed.tab
-  destinationFile: C:\UnityProjects\DonPizza\PizzaPunx2D\Assets\Data\reviews.json
+  sourceFile: C:\UnityProjects\PizzaPunx2D\Assets\Data\processed.tab
+  destinationFile: C:\UnityProjects\PizzaPunx2D\Assets\Data\reviews.json
 --- !u!4 &1856705790
 Transform:
   m_ObjectHideFlags: 0
