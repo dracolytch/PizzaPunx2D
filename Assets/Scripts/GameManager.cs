@@ -98,6 +98,10 @@ public class GameManager : MonoBehaviour
             case GameStage.late:
                 BgmAudioSource.PlayOneShot(LateMusic);
                 break;
+
+            case GameStage.end:
+                BgmAudioSource.PlayOneShot(EarlyMusic);
+                break;
         }
     }
 
@@ -154,6 +158,7 @@ public class GameManager : MonoBehaviour
     public void GoToNextScene()
     {
         currentGameState.Money = (int)CurrentMoney;
+        int SceneToLoad = 2;
         switch (currentGameStage)
         {
             case GameStage.early:
@@ -166,9 +171,10 @@ public class GameManager : MonoBehaviour
 
             case GameStage.late:
                 currentGameState.CurrentStage = GameStage.end;
+                SceneToLoad = 3;
                 break;
         }
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneToLoad);
     }
 
     private void Update()

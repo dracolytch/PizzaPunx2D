@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Endgame : MonoBehaviour
 {
@@ -10,9 +11,11 @@ public class Endgame : MonoBehaviour
     public Camera CameraToShake;
     public int NumHits = 3;
     public float TimeBetweenHits = 0.2f;
+    public float TimeUntilFadeOut = 25f;
 
     public UnityEvent OnEndGame;
     public UnityEvent OnMurderComplete;
+    public UnityEvent OnEpilogComplete;
 
     AudioSource sfx;
     Vector3 cameraHome;
@@ -50,8 +53,10 @@ public class Endgame : MonoBehaviour
             yield return StartCoroutine(ReturnToCenterCo(CameraToShake.gameObject, TimeBetweenHits - 0.05f, cameraHome));
         }
 
-        ReturnToCenterCo(CameraToShake.gameObject, 0.05f, cameraHome);
+        yield return StartCoroutine(ReturnToCenterCo(CameraToShake.gameObject, 0.05f, cameraHome));
         if (OnMurderComplete != null) OnMurderComplete.Invoke();
+
+        yield return StartCoroutine(WaitforEpilogCo(TimeUntilFadeOut));
     }
 
     public IEnumerator ReturnToCenterCo(GameObject target, float duration, Vector3 position)
@@ -66,5 +71,16 @@ public class Endgame : MonoBehaviour
             target.transform.position = Vector3.Lerp(startPosition, endPosition, elapsed / duration);
             yield return null;
         }
+    }
+
+    public IEnumerator WaitforEpilogCo(float wait)
+    {
+        yield return new WaitForSeconds(wait);
+        if (OnEpilogComplete != null) OnEpilogComplete.Invoke();
+    }
+
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }
