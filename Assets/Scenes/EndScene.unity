@@ -10217,7 +10217,7 @@ MonoBehaviour:
   CameraToShake: {fileID: 519420031}
   NumHits: 4
   TimeBetweenHits: 0.25
-  TimeUntilFadeOut: 25
+  TimeUntilFadeOut: 20
   OnEndGame:
     m_PersistentCalls:
       m_Calls:

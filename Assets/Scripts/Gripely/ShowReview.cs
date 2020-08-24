@@ -34,6 +34,7 @@ public class ShowReview : MonoBehaviour
 
     GameStage currentGameStage = GameStage.early;
     Dictionary<GameStage, List<Review>> pizzaReviews;
+    Dictionary<GameStage, List<int>> UsedReviews;
 
     public void Thank()
     {
@@ -55,8 +56,19 @@ public class ShowReview : MonoBehaviour
 
     Review GetRandomReview()
     {
+        if (UsedReviews.ContainsKey(currentGameStage) == false) UsedReviews.Add(currentGameStage, new List<int>());
+
         var r = pizzaReviews[currentGameStage];
-        return r[Random.Range(0, r.Count)];
+        var id = Random.Range(0, r.Count);
+
+        // Danger of endless loop here, but very small danger. Need to deliver a LOT of pizzas
+        while (UsedReviews[currentGameStage].Contains(id) == true)
+        {
+            id = Random.Range(0, r.Count);
+        }
+        UsedReviews[currentGameStage].Add(id);
+
+        return r[id];
     }
 
     public void Placate()
@@ -80,6 +92,7 @@ public class ShowReview : MonoBehaviour
     private void Awake()
     {
         currentStatus = ReviewStatus.closed;
+        UsedReviews = new Dictionary<GameStage, List<int>>();
     }
 
     private void Start()

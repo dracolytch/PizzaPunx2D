@@ -71,6 +71,8 @@ public class Supplier : MonoBehaviour
                 if (isCloseSocketAvailable() == true)
                 {
                     //interactable that is holdable is released
+                    var interactable = currentHolding.gameObject.GetComponent<Interactable>();
+                    interactable.isLocked = false;
                     currentHolding.Drop();
                     currentHolding = null;
                     currentState = MovementState.returning;
@@ -82,10 +84,12 @@ public class Supplier : MonoBehaviour
                 {
                     var ingredient = sourceSocket.OccupiedBy;
                     var holdable = ingredient.GetComponent<Holdable>();
-                    if (holdable != null)
+                    var interactable = ingredient.GetComponent<Interactable>();
+                    if (holdable != null && interactable != null)
                     {
                         currentHolding = holdable;
                         currentHolding.Pickup();
+                        interactable.isLocked = true;
                     }
                     currentState = MovementState.entering;
                 }
